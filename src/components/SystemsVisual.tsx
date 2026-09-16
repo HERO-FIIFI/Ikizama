@@ -114,8 +114,8 @@ const FLOWS: { d: string; dur: number; delay: number }[] = [
 ]
 
 const CODE = [1.4, 0.8, 1.15].map((len, i) => {
-  const a = iso(-2.9, -2.3 + i * 0.36, 1.7)
-  const b = iso(-2.9 + len, -2.3 + i * 0.36, 1.7)
+  const a = iso(1.3, -3.6 + i * 0.36, 1.5)
+  const b = iso(1.3 + len, -3.6 + i * 0.36, 1.5)
   return { a, b }
 })
 

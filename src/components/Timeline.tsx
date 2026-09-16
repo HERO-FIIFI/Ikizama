@@ -38,7 +38,7 @@ export function Timeline() {
               A record of things built, disciplines learned, and the path still being refined. Five threads —{' '}
               {disciplines.map((d, i) => (
                 <span key={d}>
-                  <span className={styles.leadThread}>{d.toLowerCase()}</span>
+                  <span className={styles.leadThread}>{d === 'AI' ? d : d.toLowerCase()}</span>
                   {i < disciplines.length - 1 ? ', ' : ''}
                 </span>
               ))}{' '}
@@ -48,12 +48,6 @@ export function Timeline() {
         </div>
 
         <ol className={styles.list}>
-          <li className={styles.threads} aria-hidden="true">
-            {disciplines.map((d) => (
-              <span key={d} className={styles.thread} style={{ left: threadX(d) }} />
-            ))}
-          </li>
-
           {timeline.map((t, i) => {
             const xs = t.threads.map(threadX)
             const isLast = i === last
@@ -64,6 +58,9 @@ export function Timeline() {
                     <Convergence />
                   ) : (
                     <>
+                      {disciplines.map((d) => (
+                        <span key={d} className={styles.thread} style={{ left: threadX(d) }} />
+                      ))}
                       {xs.length > 1 && (
                         <span className={styles.bridge} style={{ left: Math.min(...xs), width: Math.max(...xs) - Math.min(...xs), top: NODE_Y }} />
                       )}

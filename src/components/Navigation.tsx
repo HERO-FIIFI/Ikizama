@@ -27,8 +27,9 @@ export function Navigation({ onOpenPalette }: { onOpenPalette: () => void }) {
   return (
     <header className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
       <div className={`wrap ${styles.bar}`}>
-        <a href="#top" className={styles.mark} aria-label="Andy Fiifi Ashong — back to top">
+        <a href="#top" className={styles.mark}>
           AF<span aria-hidden="true">.</span>
+          <span className="sr-only"> — Andy Fiifi Ashong, back to top</span>
         </a>
 
         <nav className={styles.links} aria-label="Primary">
@@ -52,9 +53,10 @@ export function Navigation({ onOpenPalette }: { onOpenPalette: () => void }) {
               </a>
             </li>
           </ul>
-          <button type="button" className={styles.kbd} onClick={onOpenPalette} aria-label="Open command palette">
+          <button type="button" className={styles.kbd} onClick={onOpenPalette}>
             {isApple ? '⌘' : 'Ctrl'}
             <span>K</span>
+            <span className="sr-only"> — open command palette</span>
           </button>
         </nav>
 

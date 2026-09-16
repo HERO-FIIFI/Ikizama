@@ -1,10 +1,12 @@
 // QA helper: headless Chrome via CDP. Emulates a device, runs JS, captures screenshots.
 // usage: node scripts/shot.mjs <url> <outDir> [width=1440] [height=900] [mobile=0] [scroll=0] [js=""] [name]
 import { spawn } from 'node:child_process'
-import { writeFileSync, mkdirSync } from 'node:fs'
+import { writeFileSync, mkdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 
-const [url, outDir, w = '1440', h = '900', mobile = '0', scroll = '0', js = '', name = 'shot'] = process.argv.slice(2)
+const [url, outDir, w = '1440', h = '900', mobile = '0', scroll = '0', jsArg = '', name = 'shot'] = process.argv.slice(2)
+// `@file.js` reads the snippet from disk (shell quoting on Windows mangles inline JS).
+const js = jsArg.startsWith('@') ? readFileSync(jsArg.slice(1), 'utf8') : jsArg
 const CHROME = process.env.CHROME ?? 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 const port = 9222 + Math.floor(Math.random() * 500)
 
@@ -69,13 +71,22 @@ async function main() {
   await send('Page.enable')
   await send('Runtime.enable')
   await send('Page.navigate', { url })
-  await sleep(1800) // fonts + reveal
+  // wait for React mount + web fonts
+  for (let i = 0; i < 40; i++) {
+    const r = await send('Runtime.evaluate', {
+      expression: `!!document.querySelector('main') && document.fonts.status === 'loaded'`,
+      returnByValue: true,
+    })
+    if (r.result?.result?.value) break
+    await sleep(250)
+  }
+  await sleep(600)
   if (+scroll) {
     await send('Runtime.evaluate', { expression: `window.scrollTo(0, ${+scroll})` })
     await sleep(900)
   }
   if (js) {
-    const r = await send('Runtime.evaluate', { expression: js, awaitPromise: true, returnByValue: true })
+    const r = await send('Runtime.evaluate', { expression: js, awaitPromise: true, returnByValue: true, replMode: true })
     console.log(JSON.stringify(r.result?.result?.value ?? r.result, null, 1))
     await sleep(700)
   }

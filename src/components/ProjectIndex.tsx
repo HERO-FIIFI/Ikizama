@@ -7,7 +7,10 @@ import styles from './ProjectIndex.module.css'
 
 export function ProjectIndex() {
   const desktop = useMediaQuery('(min-width: 1024px)')
-  const [active, setActive] = useState<string | null>(projects[0].id)
+  // Desktop starts with the first system previewed; mobile starts collapsed.
+  const [active, setActive] = useState<string | null>(() =>
+    window.matchMedia('(min-width: 1024px)').matches ? projects[0].id : null,
+  )
   const ref = useReveal<HTMLElement>()
 
   // Desktop: hover/focus drives the sticky preview, never empty.
@@ -15,7 +18,7 @@ export function ProjectIndex() {
   const current = desktop ? projects.find((p) => p.id === active) ?? projects[0] : null
 
   return (
-    <section id="work" className="section" aria-labelledby="work-title" ref={ref}>
+    <section id="work" className={`section ${styles.section}`} aria-labelledby="work-title" ref={ref}>
       <div className="wrap">
         <div className="section__head">
           <p className="kicker reveal">01 / Selected systems</p>
@@ -25,7 +28,7 @@ export function ProjectIndex() {
         </div>
 
         <div className={styles.layout}>
-          <div className={styles.rows} onPointerLeave={() => desktop && setActive(projects[0].id)}>
+          <div className={styles.rows}>
             {projects.map((p, i) => (
               <ProjectRow
                 key={p.id}

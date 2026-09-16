@@ -1,3 +1,8 @@
+/* Labs follows as a sub-section, so the bottom breathing room is shared with it. */
+.section {
+  padding-bottom: clamp(40px, 4vw, 64px);
+}
+
 .layout {
   display: grid;
   grid-template-columns: 1fr;

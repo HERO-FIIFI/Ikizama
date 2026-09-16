@@ -14,17 +14,11 @@
   border-top: 1px solid var(--line);
 }
 
-.threads {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 72px;
-  display: none;
-}
-
+/* Threads live inside each row and overshoot the row border by 1px so they read as continuous. */
 .thread {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: -1px;
+  bottom: -1px;
   width: 1px;
   background: var(--line-2);
 }
@@ -44,8 +38,11 @@
 
 .nodes {
   display: none;
-  position: relative;
-  min-height: 60px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 72px;
 }
 
 .node,
@@ -165,7 +162,6 @@ a.title:focus-visible {
 }
 
 @media (min-width: 720px) {
-  .threads,
   .nodes {
     display: block;
   }
@@ -177,10 +173,12 @@ a.title:focus-visible {
   }
 
   .period {
+    grid-column: 2;
     padding-top: calc(44px - 1.9em);
   }
 
   .body {
+    grid-column: 3;
     padding-top: calc(44px - 3.2em);
   }
 

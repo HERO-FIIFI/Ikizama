@@ -20,6 +20,8 @@
 .top {
   grid-area: top;
   padding-top: 6vh;
+  position: relative;
+  z-index: 1; /* the name paints above the visual's faint overflow */
 }
 
 .kicker {
@@ -32,7 +34,7 @@
   font-weight: 800;
   font-stretch: 112%;
   font-size: clamp(4rem, 23vw, 26rem);
-  font-size: clamp(4rem, 30cqw, 30rem);
+  font-size: clamp(4rem, 34cqw, 32rem);
   line-height: 0.8;
   letter-spacing: -0.045em;
   margin-left: -0.04em;
@@ -157,12 +159,12 @@
   }
 
   .top {
-    padding-top: 2vh;
+    padding-top: 1vh;
   }
 
   .copy {
-    padding-top: 4vh;
-    padding-bottom: 6vh;
+    padding-top: 2vh;
+    padding-bottom: 3vh;
     justify-content: center;
   }
 
