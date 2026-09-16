@@ -5,7 +5,7 @@ import styles from './Navigation.module.css'
 const links = [
   { href: '#work', label: 'Work' },
   { href: '#engineering', label: 'Engineering' },
-  { href: '#path', label: 'The Path' },
+  { href: '/path', label: 'The Path' },
   { href: '#contact', label: 'Contact' },
 ]
 

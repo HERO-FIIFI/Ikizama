@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react'
-import { projects } from '../data/projects'
-import { socials } from '../data/socials'
-import { filterCommands, moveIndex, type Command } from '../lib/palette'
+import { createCommands, filterCommands, moveIndex, type Command } from '../lib/palette'
 import styles from './CommandPalette.module.css'
 
 interface Props {
@@ -13,23 +11,7 @@ const go = (hash: string) => () => {
   document.querySelector(hash)?.scrollIntoView({ block: 'start' })
   history.replaceState(null, '', hash)
 }
-const openUrl = (url: string) => () => window.open(url, '_blank', 'noopener,noreferrer')
-
-const commands: Command[] = [
-  ...projects.map<Command>((p) => ({
-    id: p.id,
-    label: `View ${p.name}`,
-    keywords: `project system ${p.category.join(' ')}`,
-    group: 'Systems',
-    run: go(`#project-${p.id}`),
-  })),
-  { id: 'eng', label: 'Explore engineering', keywords: 'skills how i build', group: 'Navigate', run: go('#engineering') },
-  { id: 'path', label: 'View the path', keywords: 'timeline career history', group: 'Navigate', run: go('#path') },
-  { id: 'contact', label: 'Contact Andy', keywords: 'email hire', group: 'Connect', run: go('#contact') },
-  { id: 'cv', label: 'Download CV', keywords: 'resume pdf', group: 'Connect', run: openUrl(socials.cv) },
-  { id: 'gh', label: 'Open GitHub', keywords: 'code repositories', group: 'Connect', run: openUrl(socials.github) },
-  { id: 'li', label: 'Open LinkedIn', keywords: 'profile network', group: 'Connect', run: openUrl(socials.linkedin) },
-]
+const commands = createCommands()
 
 export function CommandPalette({ open, onClose }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null)
@@ -61,7 +43,11 @@ export function CommandPalette({ open, onClose }: Props) {
     if (!c) return
     onClose()
     // let the dialog close (and the focus return) before scrolling
-    requestAnimationFrame(c.run)
+    requestAnimationFrame(() => {
+      if (c.href === '/path') window.location.assign(c.href)
+      else if (c.href.startsWith('#')) go(c.href)()
+      else window.open(c.href, '_blank', 'noopener,noreferrer')
+    })
   }
 
   const onKeyDown = (e: KeyboardEvent) => {

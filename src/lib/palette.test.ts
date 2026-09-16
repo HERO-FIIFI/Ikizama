@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { filterCommands, moveIndex } from './palette.ts'
+import { createCommands, filterCommands, moveIndex } from './palette.ts'
 
 const cmds = [
   { label: 'View AURA', keywords: 'project ai rag' },
@@ -23,4 +23,8 @@ test('moveIndex wraps in both directions and survives empty lists', () => {
   assert.equal(moveIndex(2, 1, 3), 0)
   assert.equal(moveIndex(1, 1, 3), 2)
   assert.equal(moveIndex(5, 1, 0), 0)
+})
+
+test('Path command opens the full Path page', () => {
+  assert.equal(createCommands().find((command) => command.id === 'path')?.href, '/path')
 })

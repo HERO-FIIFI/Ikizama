@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
-import { Navigation } from './components/Navigation'
-import { Hero } from './components/Hero'
-import { ProjectIndex } from './components/ProjectIndex'
-import { Labs } from './components/Labs'
-import { EngineeringProfile } from './components/EngineeringProfile'
-import { Timeline } from './components/Timeline'
-import { Contact } from './components/Contact'
-import { Footer } from './components/Footer'
-import { CommandPalette } from './components/CommandPalette'
+import { Navigation } from '../components/Navigation'
+import { Hero } from '../components/Hero'
+import { ProjectIndex } from '../components/ProjectIndex'
+import { Labs } from '../components/Labs'
+import { EngineeringProfile } from '../components/EngineeringProfile'
+import { PathPreview } from '../components/PathPreview'
+import { Contact } from '../components/Contact'
+import { Footer } from '../components/Footer'
+import { CommandPalette } from '../components/CommandPalette'
 
-export default function App() {
+export function HomePage() {
   const [paletteOpen, setPaletteOpen] = useState(false)
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function App() {
         <ProjectIndex />
         <Labs />
         <EngineeringProfile />
-        <Timeline />
+        <PathPreview />
         <Contact />
       </main>
       <Footer />

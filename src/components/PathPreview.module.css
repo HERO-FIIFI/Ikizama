@@ -14,15 +14,6 @@
   border-top: 1px solid var(--line);
 }
 
-/* Threads live inside each row and overshoot the row border by 1px so they read as continuous. */
-.thread {
-  position: absolute;
-  top: -1px;
-  bottom: -1px;
-  width: 1px;
-  background: var(--line-2);
-}
-
 .item {
   position: relative;
   display: grid;
@@ -32,10 +23,6 @@
   border-bottom: 1px solid var(--line);
 }
 
-.item:last-child {
-  border-bottom: 0;
-}
-
 .nodes {
   display: none;
   position: absolute;
@@ -43,6 +30,15 @@
   bottom: 0;
   left: 0;
   width: 72px;
+}
+
+/* Threads live inside each row and overshoot the row border by 1px so they read as continuous. */
+.thread {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  width: 1px;
+  background: var(--line-2);
 }
 
 .node,
@@ -104,7 +100,7 @@
   min-width: 0;
 }
 
-.discipline {
+.kind {
   font-family: var(--mono);
   font-size: 0.6875rem;
   letter-spacing: 0.14em;
@@ -144,9 +140,16 @@ a.title:focus-visible {
   color: var(--ink-3);
 }
 
-/* ---- Coda ---- */
-.coda {
-  margin-top: clamp(64px, 8vw, 120px);
+/* ---- Handoff to /path ---- */
+.handoff {
+  margin-top: clamp(48px, 6vw, 96px);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: end;
+}
+
+.statement {
   display: grid;
   gap: 4px;
   font-weight: 500;
@@ -157,8 +160,46 @@ a.title:focus-visible {
   text-wrap: balance;
 }
 
-.codaLast {
+.statement span:last-child {
   color: var(--ink);
+}
+
+.more {
+  justify-self: start;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 14px;
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line-2);
+  transition:
+    color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.more::after {
+  content: '→';
+  font-family: var(--mono);
+  font-size: 0.6em;
+  color: var(--ink-3);
+  transition:
+    transform var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.more:hover,
+.more:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.more:hover::after,
+.more:focus-visible::after {
+  color: var(--accent);
+  transform: translateX(6px);
 }
 
 @media (min-width: 720px) {
@@ -186,9 +227,13 @@ a.title:focus-visible {
     display: none;
   }
 
-  .coda {
-    justify-items: end;
-    text-align: right;
+  .handoff {
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+  }
+
+  .more {
+    justify-self: end;
   }
 }
 

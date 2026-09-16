@@ -11,4 +11,10 @@ export const site = {
   role: 'Software Engineer · AI & Automation',
   location: 'Accra, Ghana',
   availability: 'Available for engineering opportunities',
+  // TODO: add the start year once confirmed — dates are never guessed.
+  position: {
+    period: 'Present',
+    title: 'Internal Audit Officer — AI & Automation',
+    org: 'eProcess International Ghana Ltd · Ecobank technology ecosystem · Accra',
+  },
 } as const
