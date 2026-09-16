@@ -1,0 +1,30 @@
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.rows {
+  min-width: 0;
+}
+
+.preview {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    column-gap: clamp(48px, 6vw, 120px);
+    align-items: start;
+  }
+
+  .preview {
+    display: block;
+  }
+
+  .sticky {
+    position: sticky;
+    top: calc(var(--nav-h) + 40px);
+    padding-top: 12px;
+  }
+}

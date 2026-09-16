@@ -1,0 +1,31 @@
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 28px 0 40px;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 32px;
+}
+
+.row a {
+  color: var(--ink-2);
+}
+
+.mid {
+  color: var(--ink-3);
+}
+
+@media (max-width: 720px) {
+  .mid {
+    order: 3;
+    width: 100%;
+  }
+}

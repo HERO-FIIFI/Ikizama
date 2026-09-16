@@ -1,0 +1,156 @@
+.row {
+  border-top: 1px solid var(--line);
+  transition: opacity var(--dur) var(--ease);
+}
+
+.row:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.dimmed {
+  opacity: 0.4;
+}
+
+.head {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  gap: 16px 20px;
+  align-items: start;
+  padding: clamp(24px, 3vw, 40px) 0;
+}
+
+.trigger {
+  font: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+  display: inline-block;
+  transition: transform var(--dur) var(--ease);
+}
+
+/* Stretch the hit area over the whole header row. */
+.trigger::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.trigger:focus-visible {
+  outline-offset: 6px;
+}
+
+.active .trigger {
+  transform: translateX(6px);
+}
+
+.index {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 0.55em;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  transition: color var(--dur) var(--ease);
+}
+
+.marker {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  transform: scale(0.4);
+  transition:
+    opacity var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+.active .marker {
+  opacity: 1;
+  transform: none;
+}
+
+.active .index {
+  color: var(--ink-2);
+}
+
+.main {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.name {
+  font-weight: 600;
+  font-size: clamp(2rem, 4.6vw, 4.25rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+
+.summary {
+  color: var(--ink-2);
+  max-width: 52ch;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin-top: 4px;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.kind {
+  transition: color var(--dur) var(--ease);
+}
+
+.active .kind {
+  color: var(--accent);
+}
+
+.year {
+  padding-top: 0.55em;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+
+.inline {
+  padding: 0 0 clamp(28px, 4vw, 40px) 64px;
+}
+
+@media (max-width: 600px) {
+  .head {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'index year'
+      'main main';
+  }
+
+  .index {
+    grid-area: index;
+    padding-top: 0;
+  }
+
+  .year {
+    grid-area: year;
+    padding-top: 0;
+  }
+
+  .main {
+    grid-area: main;
+  }
+
+  .inline {
+    padding-left: 0;
+  }
+}

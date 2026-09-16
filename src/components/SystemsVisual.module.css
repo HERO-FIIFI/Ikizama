@@ -1,0 +1,206 @@
+.stage {
+  --px: 0;
+  --py: 0;
+  width: 100%;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Depth layers — pointer parallax, gentle and mechanical. */
+.back,
+.mid,
+.front {
+  transition: transform 900ms var(--ease);
+  will-change: transform;
+}
+
+.back {
+  transform: translate(calc(var(--px) * 3px), calc(var(--py) * 2px));
+}
+
+.mid {
+  transform: translate(calc(var(--px) * 8px), calc(var(--py) * 5px));
+}
+
+.front {
+  transform: translate(calc(var(--px) * 16px), calc(var(--py) * 10px));
+}
+
+.drift {
+  animation: drift 12s ease-in-out infinite;
+}
+
+.driftSlow {
+  animation: drift 16s ease-in-out infinite reverse;
+}
+
+@keyframes drift {
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Ground plane */
+.grid {
+  fill: none;
+  stroke: var(--ink);
+  stroke-opacity: 0.06;
+  stroke-width: 1;
+}
+
+/* Surfaces — technical drawing, not rendering */
+.faceT,
+.faceL,
+.faceR,
+.doc,
+.docFront {
+  stroke: var(--ink);
+  stroke-opacity: 0.32;
+  stroke-width: 1;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.faceT {
+  fill: var(--ink);
+  fill-opacity: 0.1;
+}
+
+.faceL {
+  fill: var(--ink);
+  fill-opacity: 0.05;
+}
+
+.faceR {
+  fill: var(--ink);
+  fill-opacity: 0.025;
+}
+
+.doc {
+  fill: var(--bg);
+  fill-opacity: 0.9;
+  stroke-opacity: 0.22;
+}
+
+.docFront {
+  fill: var(--bg-2);
+  stroke-opacity: 0.4;
+}
+
+.docLine,
+.edge,
+.hidden {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.docLine {
+  stroke-opacity: 0.35;
+}
+
+.edge {
+  stroke-opacity: 0.25;
+}
+
+.hidden {
+  stroke-opacity: 0.12;
+  stroke-dasharray: 2 3;
+}
+
+.shadow {
+  fill: var(--ink);
+  fill-opacity: 0.04;
+}
+
+/* Routes and moving information */
+.route {
+  fill: none;
+  stroke: var(--ink);
+  stroke-opacity: 0.16;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.flow {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 4 96;
+  animation: flow linear infinite;
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+/* States */
+.core {
+  fill: var(--accent);
+}
+
+.coreRing {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    stroke-opacity: 0.1;
+    transform: scale(1);
+  }
+  50% {
+    stroke-opacity: 0.6;
+    transform: scale(1.15);
+  }
+}
+
+.coreRing {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.dot {
+  fill: var(--ink-3);
+}
+
+.dotAccent {
+  fill: var(--accent);
+}
+
+.code {
+  stroke: var(--ink-3);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-opacity: 0.7;
+}
+
+.label {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: var(--ink-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back,
+  .mid,
+  .front,
+  .drift,
+  .driftSlow {
+    animation: none;
+    transform: none;
+  }
+}
