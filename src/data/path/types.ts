@@ -1,4 +1,4 @@
-export const pathDisciplines = ['Engineering', 'AI', 'Automation', 'Data', 'Governance'] as const
+﻿export const pathDisciplines = ['Engineering', 'AI', 'Automation', 'Data', 'Governance'] as const
 
 export type Discipline = (typeof pathDisciplines)[number]
 export type ProjectKind =
@@ -17,6 +17,8 @@ export type LifecycleStatus =
   | 'Abandoned'
   | 'Planned Return'
   | 'Private / Internal'
+  /** Not yet reviewed with Andy — printed as such, never guessed. */
+  | 'Undetermined'
 export type DisclosurePolicy = 'public' | 'conservative'
 export type EntryWeight = 'chapter' | 'trace'
 export type EvidenceState = 'verified' | 'user-supplied' | 'unknown'

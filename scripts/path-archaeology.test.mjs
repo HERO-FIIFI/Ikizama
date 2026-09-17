@@ -69,3 +69,25 @@ test('throws when GitHub returns an HTTP failure', async () => {
     /GitHub request failed: 403 Forbidden/,
   )
 })
+
+test('gitFacts reads earliest and latest author dates and the commit count from injected git output', async () => {
+  const { gitFacts } = await import('./path-archaeology.mjs')
+  const calls = []
+  const run = async (_cmd, args) => {
+    calls.push(args)
+    if (args.includes('--max-parents=0')) return { stdout: 'aaa\nbbb\n' }
+    if (args.includes('show')) return { stdout: args.includes('aaa') ? '2025-03-02T10:00:00+00:00\n' : '2024-11-26T08:00:00+00:00\n' }
+    if (args.includes('log')) return { stdout: '2026-09-16T12:00:00+00:00\n' }
+    if (args.includes('--count')) return { stdout: '42\n' }
+    return { stdout: '' }
+  }
+  const facts = await gitFacts({ name: 'Demo', url: 'https://github.com/example/Demo' }, { run, root: process.env.TEMP ?? '/tmp' })
+  assert.deepEqual(facts, { earliestCommitDate: '2024-11-26', latestCommitDate: '2026-09-16', commitCount: 42 })
+  assert.ok(calls[0].includes('--filter=blob:none'), 'clones without blobs')
+})
+
+test('gitFacts returns null for repositories without readable history', async () => {
+  const { gitFacts } = await import('./path-archaeology.mjs')
+  const run = async () => { throw new Error('fatal: empty repository') }
+  assert.equal(await gitFacts({ name: 'Empty', url: 'https://github.com/example/Empty' }, { run, root: process.env.TEMP ?? '/tmp' }), null)
+})

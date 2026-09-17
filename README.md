@@ -1,4 +1,4 @@
-# Ikizama — Andy Fiifi Ashong
+﻿# Ikizama — Andy Fiifi Ashong
 
 Two-route portfolio: `/` is the concise recruiter-facing work; `/path` is **My Dao**, the evidence-backed record of how the work came to be. React 19 + TypeScript + Vite, CSS Modules, no other runtime dependencies.
 
@@ -8,7 +8,7 @@ npm run dev              # local dev server
 npm run build            # type-check + production build → dist/ (+ dist/404.html SPA fallback)
 npm run preview          # serve dist/ locally
 npm test                 # node --test: palette, routes, metadata, path validator, archaeology
-npm run path:archaeology # fetch public GitHub inventory → data/path/raw/github-public.json (gitignored)
+npm run path:archaeology # public GitHub inventory + Git author dates/commit counts → data/path/raw/github-public.json (gitignored)
 npm run og               # regenerate public/og.png (needs Chrome)
 ```
 
