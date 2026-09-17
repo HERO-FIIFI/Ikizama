@@ -68,18 +68,22 @@ async function main() {
     mobile: mobile === '1',
   })
   if (mobile === '1') await send('Emulation.setTouchEmulationEnabled', { enabled: true })
+  if (process.env.QA_REDUCED_MOTION) {
+    await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] })
+  }
   await send('Page.enable')
   await send('Runtime.enable')
   await send('Page.navigate', { url })
-  // wait for React mount + web fonts
+  // wait for React mount, then force the web fonts to load before capturing
   for (let i = 0; i < 40; i++) {
-    const r = await send('Runtime.evaluate', {
-      expression: `!!document.querySelector('main') && document.fonts.status === 'loaded'`,
-      returnByValue: true,
-    })
+    const r = await send('Runtime.evaluate', { expression: `!!document.querySelector('main')`, returnByValue: true })
     if (r.result?.result?.value) break
     await sleep(250)
   }
+  await send('Runtime.evaluate', {
+    expression: `Promise.all([document.fonts.load('800 100px Archivo'), document.fonts.load('400 16px Archivo'), document.fonts.load('400 12px "Fragment Mono"')]).then(() => document.fonts.ready)`,
+    awaitPromise: true,
+  })
   await sleep(600)
   if (+scroll) {
     await send('Runtime.evaluate', { expression: `window.scrollTo(0, ${+scroll})` })

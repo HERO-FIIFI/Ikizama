@@ -1,0 +1,68 @@
+.section {
+  padding-top: var(--section);
+}
+
+.grid {
+  display: grid;
+  gap: 40px;
+  padding-bottom: clamp(96px, 14vw, 216px);
+}
+
+.title {
+  max-width: 8ch;
+  margin-top: 24px;
+  font-size: clamp(2.75rem, 6.5vw, 7rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 0.91;
+  text-wrap: balance;
+}
+
+.copy {
+  max-width: 65ch;
+  font-size: clamp(1.125rem, 1.55vw, 1.45rem);
+  line-height: 1.48;
+  letter-spacing: -0.015em;
+  color: var(--ink-2);
+}
+
+.copy p + p {
+  margin-top: 1.35em;
+}
+
+/* The threshold: everything below is evidence-backed. The rail starts here. */
+.threshold {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  border-top: 1px solid var(--line-2);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.13em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  scroll-margin-top: 24px;
+}
+
+.threshold:focus-visible {
+  outline-offset: 8px;
+}
+
+.thresholdMark {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-left: -3px;
+}
+
+@media (min-width: 800px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
+    gap: clamp(48px, 9vw, 176px);
+  }
+}

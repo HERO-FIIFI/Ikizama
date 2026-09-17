@@ -1,0 +1,231 @@
+.record {
+  --path-rail-inset: clamp(28px, 5vw, 72px);
+}
+
+.era {
+  padding-block: clamp(64px, 8vw, 128px) var(--section);
+  border-bottom: 1px solid var(--line);
+}
+
+.inner {
+  position: relative;
+  width: min(100% - 2 * var(--gutter), var(--max));
+}
+
+/* The central rail: continuous through the era, into the padding above and below. */
+.inner::before {
+  position: absolute;
+  z-index: 0;
+  top: calc(-1 * clamp(64px, 8vw, 128px));
+  bottom: calc(-1 * var(--section));
+  left: 0;
+  width: 1px;
+  background: var(--line-2);
+  content: '';
+}
+
+.eraHeader {
+  display: grid;
+  gap: 24px;
+  margin-bottom: clamp(48px, 6vw, 96px);
+  padding-left: var(--path-rail-inset);
+}
+
+.eraLabel,
+.period,
+.metadata,
+.disciplines,
+.ledger {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eraLabel,
+.period,
+.metadata,
+.ledger {
+  color: var(--ink-3);
+}
+
+.eraHeader h2 {
+  font-size: clamp(2rem, 3.8vw, 3.75rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.framing {
+  max-width: 58ch;
+  margin-top: 18px;
+  color: var(--ink-2);
+  font-size: 1.0625rem;
+  text-wrap: pretty;
+}
+
+.entries {
+  position: relative;
+  padding-left: var(--path-rail-inset);
+  border-top: 1px solid var(--line);
+}
+
+.entry {
+  position: relative;
+}
+
+/* Node on the rail, aligned to the entry's title line. Text carries the status; the ring only echoes it. */
+.entry::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--path-rail-inset) - 3.5px);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink-2);
+  box-shadow: 0 0 0 4px var(--bg);
+  z-index: 1;
+}
+
+.entryChapter {
+  --node-top: calc(clamp(32px, 5vw, 80px) + 2.4em);
+  --branch-top: calc(var(--node-top) - 40px);
+}
+
+.entryTrace {
+  --node-top: calc(clamp(32px, 5vw, 80px) + 0.6em);
+  --branch-top: calc(var(--node-top) - 40px);
+}
+
+.entry::before {
+  top: var(--node-top);
+}
+
+.entry[data-disclosure='conservative']::before {
+  background: var(--bg);
+  border: 1px solid var(--ink-2);
+}
+
+.entry[data-lifecycle='Paused']::before,
+.entry[data-lifecycle='Abandoned']::before {
+  background: var(--ink-3);
+  opacity: 0.6;
+}
+
+.chapter,
+.trace {
+  padding-block: clamp(32px, 5vw, 80px);
+  border-bottom: 1px solid var(--line);
+}
+
+.chapter {
+  display: grid;
+  gap: 28px;
+}
+
+.chapter h3,
+.trace h3 {
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+.chapter h3 {
+  margin-top: 12px;
+  font-size: clamp(2.25rem, 4.6vw, 4.25rem);
+  text-wrap: balance;
+}
+
+.trace h3 {
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+}
+
+.metadata {
+  margin-top: 14px;
+  line-height: 1.55;
+}
+
+.chapterCopy {
+  display: grid;
+  gap: 18px;
+  max-width: 62ch;
+  color: var(--ink-2);
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.summary {
+  color: var(--ink);
+  font-size: clamp(1.125rem, 1.55vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.disciplines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 22px;
+  color: var(--ink-2);
+}
+
+.trace {
+  display: grid;
+  grid-template-columns: minmax(5rem, 0.4fr) 1fr;
+  gap: 20px;
+}
+
+.trace .period {
+  padding-top: 0.32em;
+}
+
+.trace .disciplines {
+  margin-top: 14px;
+}
+
+.traceSummary {
+  max-width: 58ch;
+  margin-top: 12px;
+  color: var(--ink-2);
+}
+
+.ledger {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  padding: 24px 0 0 var(--path-rail-inset);
+}
+
+.ledger p {
+  color: var(--ink-3);
+}
+
+.ledger ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  color: var(--ink-2);
+}
+
+@media (min-width: 800px) {
+  .eraHeader,
+  .chapter {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
+    gap: clamp(48px, 9vw, 176px);
+  }
+}
+
+@media (max-width: 520px) {
+  .record {
+    --path-rail-inset: 24px;
+  }
+
+  .trace {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}

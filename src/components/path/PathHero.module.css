@@ -1,0 +1,169 @@
+.hero {
+  min-height: 100svh;
+  display: flex;
+  border-bottom: 1px solid var(--line);
+}
+
+.inner {
+  container-type: inline-size;
+  width: min(100% - 2 * var(--gutter), var(--max));
+  padding-top: calc(var(--nav-h) + clamp(48px, 9vh, 120px));
+  padding-bottom: clamp(32px, 5vh, 72px);
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  align-items: start;
+}
+
+.eyebrow,
+.cta {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  color: var(--ink-3);
+}
+
+/* Sized from the container so "MY DAO." spans ~90% of the measure at every width. */
+.title {
+  margin: clamp(28px, 6vh, 80px) 0 0 -0.04em;
+  font-size: clamp(4rem, 14.7vw, 14.5rem);
+  font-size: clamp(4rem, 21cqw, 24rem);
+  font-weight: 800;
+  font-stretch: 112%;
+  letter-spacing: -0.045em;
+  line-height: 0.8;
+  white-space: nowrap;
+}
+
+.stop {
+  color: var(--accent);
+}
+
+/* DAO and 道 share one slot; DAO's width sets it, 道 is centred inside. */
+.slot {
+  display: inline-grid;
+  vertical-align: baseline;
+}
+
+.dao,
+.kanji {
+  grid-area: 1 / 1;
+}
+
+.dao {
+  animation: dao-reconstruct 22s var(--ease) infinite;
+}
+
+.kanji {
+  justify-self: center;
+  align-self: end;
+  font-family: 'Noto Sans CJK SC', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans', 'Yu Gothic', 'Microsoft YaHei', sans-serif;
+  font-size: 0.88em;
+  font-weight: 700;
+  font-stretch: normal;
+  letter-spacing: 0;
+  line-height: 0.95;
+  color: var(--accent);
+  opacity: 0;
+  animation: kanji-reconstruct 22s var(--ease) infinite;
+}
+
+.footer {
+  align-self: end;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.philosophy {
+  display: grid;
+  font-size: clamp(1rem, 1.25vw, 1.25rem);
+  line-height: 1.35;
+  letter-spacing: -0.018em;
+  color: var(--ink-2);
+}
+
+.philosophy span:first-child,
+.philosophy span:last-child {
+  color: var(--ink);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  min-inline-size: 24px;
+  min-block-size: 24px;
+  color: var(--ink-2);
+  transition: color var(--dur) var(--ease);
+}
+
+.cta:hover,
+.cta:focus-visible {
+  color: var(--accent);
+}
+
+/* Slow reconstruction: long rests, a wipe across, never a flicker. */
+@keyframes dao-reconstruct {
+  0%,
+  31% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+
+  43%,
+  100% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+}
+
+@keyframes kanji-reconstruct {
+  0%,
+  39% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+
+  51%,
+  82% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+
+  94%,
+  100% {
+    clip-path: inset(0 0 0 100%);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .footer {
+    align-items: start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dao,
+  .kanji {
+    animation: none;
+    clip-path: none;
+  }
+
+  .dao {
+    opacity: 1;
+  }
+
+  /* Static pairing: DAO stays in the title, 道 stays in the eyebrow. */
+  .kanji {
+    display: none;
+  }
+}

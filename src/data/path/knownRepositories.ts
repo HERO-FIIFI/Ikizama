@@ -1,6 +1,10 @@
 export interface KnownRepository {
   name: string
   meaning: string
+  organization?: {
+    name: string
+    url: string
+  }
 }
 
 /**
@@ -22,14 +26,14 @@ export const knownRepositories: KnownRepository[] = [
   { name: 'ShopFlow', meaning: 'Shop-management application exploring an architecture; paused.' },
   { name: 'ShopSense', meaning: 'Shop-management application exploring a different architecture; planned return.' },
   { name: 'Starkuchen-numero', meaning: 'Premium utensils e-commerce web app.' },
-  { name: 'Pouch', meaning: 'Seamsoft budgeting and automatic SMS-parsing web app; planned return.' },
-  { name: 'Lunaflow', meaning: 'Seamsoft menstrual-cycle tracking web app; planned return.' },
-  { name: 'Lunell', meaning: 'Seamsoft menstrual-cycle tracking web app; planned return.' },
-  { name: 'ChartG', meaning: 'Seamsoft forex journaling and multipurpose app; planned return.' },
+  { name: 'Pouch', meaning: 'Seamsoft budgeting and automatic SMS-parsing web app; planned return.', organization: { name: 'Seamsoft Labs', url: 'https://seamsoftlabs.com' } },
+  { name: 'Lunaflow', meaning: 'Seamsoft menstrual-cycle tracking web app; planned return.', organization: { name: 'Seamsoft Labs', url: 'https://seamsoftlabs.com' } },
+  { name: 'Lunell', meaning: 'Seamsoft menstrual-cycle tracking web app; planned return.', organization: { name: 'Seamsoft Labs', url: 'https://seamsoftlabs.com' } },
+  { name: 'ChartG', meaning: 'Seamsoft forex journaling and multipurpose app; planned return.', organization: { name: 'Seamsoft Labs', url: 'https://seamsoftlabs.com' } },
   { name: 'AutoResolve', meaning: 'Triage project inspired by a HackerRank YouTube competition.' },
-  { name: 'Retrocade', meaning: 'Seamsoft retro-gaming app; planned return and publication.' },
+  { name: 'Retrocade', meaning: 'Seamsoft retro-gaming app; planned return and publication.', organization: { name: 'Seamsoft Labs', url: 'https://seamsoftlabs.com' } },
   { name: 'EduHire', meaning: 'Job-vacancy landing page.' },
-  { name: 'Chef-Odin', meaning: 'Seamsoft cooking web app; planned return.' },
+  { name: 'Chef-Odin', meaning: 'Seamsoft cooking web app; planned return.', organization: { name: 'Seamsoft Labs', url: 'https://seamsoftlabs.com' } },
   { name: 'OEVS', meaning: 'Online voting platform; planned return.' },
   { name: 'MEDIGH', meaning: 'Hospital demo website.' },
   { name: 'Dudemy', meaning: 'Udemy-style learning-platform duplicate and experiment.' },

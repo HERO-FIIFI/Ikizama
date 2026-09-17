@@ -1,0 +1,31 @@
+.continuation {
+  min-height: 70svh;
+  padding-top: clamp(64px, 10vw, 144px);
+}
+
+.inner {
+  position: relative;
+  width: min(100% - 2 * var(--gutter), var(--max));
+  min-height: calc(70svh - clamp(64px, 10vw, 144px));
+  padding-left: var(--path-rail-inset);
+}
+
+/* The rail continues into negative space and fades — no terminal node. */
+.inner::before {
+  position: absolute;
+  top: calc(-1 * clamp(64px, 10vw, 144px));
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--line-2) 0%, var(--line-2) 45%, transparent 100%);
+  content: '';
+}
+
+.continuation p {
+  position: relative;
+  margin: 0;
+  color: var(--ink-3);
+  font-family: var(--mono);
+  font-size: clamp(0.6875rem, 1vw, 0.8125rem);
+  letter-spacing: 0.14em;
+}

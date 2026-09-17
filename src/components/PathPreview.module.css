@@ -180,26 +180,10 @@ a.title:focus-visible {
     border-color var(--dur) var(--ease);
 }
 
-.more::after {
-  content: '→';
-  font-family: var(--mono);
-  font-size: 0.6em;
-  color: var(--ink-3);
-  transition:
-    transform var(--dur) var(--ease),
-    color var(--dur) var(--ease);
-}
-
 .more:hover,
 .more:focus-visible {
   color: var(--accent);
   border-color: var(--accent);
-}
-
-.more:hover::after,
-.more:focus-visible::after {
-  color: var(--accent);
-  transform: translateX(6px);
 }
 
 @media (min-width: 720px) {

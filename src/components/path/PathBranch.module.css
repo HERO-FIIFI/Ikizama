@@ -1,0 +1,91 @@
+.branch {
+  position: relative;
+}
+
+/* Sits in the gap between the rail and the text, centred on the entry's node. */
+.geometry {
+  position: absolute;
+  z-index: 0;
+  top: var(--branch-top, 0);
+  left: calc(-1 * var(--path-rail-inset));
+  width: calc(var(--path-rail-inset) * 0.55);
+  height: 88px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.path {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 2 5;
+}
+
+.iteration .path {
+  stroke-dasharray: 1 4;
+}
+
+.parallel .path {
+  stroke-dasharray: 8 5;
+}
+
+.quiet .path {
+  opacity: 0.5;
+  stroke-dasharray: 4 5;
+}
+
+.reconnectLead {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.reconnect {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  gap: 0.4em;
+  margin: 0 0 12px;
+  color: var(--ink-2);
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.reconnect:hover,
+.reconnect:focus-visible {
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .geometry .path {
+    animation: settle 1.4s var(--ease) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .geometry .path {
+    animation: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .geometry {
+    display: none;
+  }
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+    stroke-dashoffset: 22;
+  }
+
+  to {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}

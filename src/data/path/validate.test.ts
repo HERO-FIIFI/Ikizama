@@ -92,7 +92,7 @@ test('rejects exact private dates in conservative browser-visible copy', () => {
       entries: [{
         ...conservativeEntry(),
         period: '2026-09-16',
-        narrative: 'A private milestone happened on 2026-09-16.',
+        narrative: ['A private milestone happened on 2026-09-16.'],
       }],
     }],
   }

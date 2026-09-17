@@ -50,7 +50,8 @@ export interface PathEntry {
   summary: string
   weight?: EntryWeight
   period?: string
-  narrative?: string
+  /** First-person prose for chapters: what changed, what was carried forward. */
+  narrative?: string[]
   evidence?: EngineeringEvidence
   branch?: PathBranch
   reconnectsTo?: string

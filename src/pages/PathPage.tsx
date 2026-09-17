@@ -1,9 +1,18 @@
+import { pathDataset } from '../data/path/path'
+import { BeforeRecord } from '../components/path/BeforeRecord'
+import { PathHero } from '../components/path/PathHero'
+import { PathNavigation } from '../components/path/PathNavigation'
+import { PathRecord } from '../components/path/PathRecord'
+
 export function PathPage() {
   return (
-    <main>
-      <h1>My Dao Path</h1>
-      <p>This page is being prepared.</p>
-      <a href="/">Back to home</a>
-    </main>
+    <>
+      <PathNavigation />
+      <main>
+        <PathHero />
+        <BeforeRecord beforeRecord={pathDataset.beforeRecord} />
+        <PathRecord eras={pathDataset.eras} />
+      </main>
+    </>
   )
 }
