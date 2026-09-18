@@ -1,4 +1,4 @@
-import { site } from '../data/socials'
+import { site, socials } from '../data/socials'
 import styles from './Footer.module.css'
 
 export function Footer() {
@@ -7,6 +7,13 @@ export function Footer() {
       <div className={`wrap ${styles.row}`}>
         <p>
           © {new Date().getFullYear()} {site.name}
+          <span className={styles.sep} aria-hidden="true">
+            {' '}
+            |{' '}
+          </span>
+          <a href={socials.seamsoft} className={styles.org} target="_blank" rel="noopener noreferrer">
+            Seamsoft Labs
+          </a>
         </p>
         <p className={styles.mid}>{site.location} · Designed &amp; engineered by Andy.</p>
         <a href="#top" className="link">

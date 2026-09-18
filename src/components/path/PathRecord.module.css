@@ -156,6 +156,17 @@
   margin-top: 6px;
 }
 
+.org {
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur) var(--ease);
+}
+
+.org:hover,
+.org:focus-visible {
+  border-bottom-color: var(--accent);
+}
+
 .chapterCopy {
   display: grid;
   gap: 18px;

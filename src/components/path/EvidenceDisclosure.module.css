@@ -5,6 +5,15 @@
   font-size: 0.875rem;
 }
 
+.note {
+  margin-top: 12px;
+  color: var(--ink-3);
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 .details summary {
   min-block-size: 24px;
   color: var(--ink);

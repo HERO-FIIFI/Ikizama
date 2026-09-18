@@ -4,6 +4,7 @@ export const socials = {
   github: 'https://github.com/HERO-FIIFI',
   linkedin: 'https://www.linkedin.com/in/andy-fiifi-ashong/',
   cv: '/cv.pdf',
+  seamsoft: 'https://seamsoftlabs.com',
 } as const
 
 export const site = {

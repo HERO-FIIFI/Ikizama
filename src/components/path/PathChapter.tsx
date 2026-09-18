@@ -22,11 +22,20 @@ export function PathChapter({ entry }: { entry: PathEntry }) {
   )
 }
 
-/** Kind and lifecycle, always as text — status is never colour-only. */
+/** Kind, organisation and lifecycle, always as text — status is never colour-only. */
 export function EntryStatus({ entry }: { entry: PathEntry }) {
   return (
     <p className={styles.metadata}>
       <span>{entry.kind}</span>
+      {entry.organization && (
+        <>
+          <span aria-hidden="true"> · </span>
+          <a href={entry.organization.url} className={styles.org} target="_blank" rel="noopener noreferrer">
+            {entry.organization.name}
+            <span aria-hidden="true"> ↗</span>
+          </a>
+        </>
+      )}
       <span aria-hidden="true"> · </span>
       <span>
         <span className="sr-only">Lifecycle: </span>

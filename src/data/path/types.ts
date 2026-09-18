@@ -52,6 +52,8 @@ export interface PathEntry {
   summary: string
   weight?: EntryWeight
   period?: string
+  /** Who the work is for, when it is not Andy alone (e.g. Seamsoft Labs). */
+  organization?: { name: string; url: string }
   /** First-person prose for chapters: what changed, what was carried forward. */
   narrative?: string[]
   evidence?: EngineeringEvidence

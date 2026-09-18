@@ -7,6 +7,15 @@ export function EvidenceDisclosure({ entry }: { entry: PathEntry }) {
 
   const evidence = entry.evidence
 
+  // Nothing but a state means nothing verifiable yet — say so inline instead of an empty drawer.
+  if (Object.keys(evidence).every((key) => key === 'state')) {
+    return (
+      <p className={styles.note}>
+        {evidence.state === 'user-supplied' ? 'Described by Andy · no public Git evidence yet' : 'Evidence unknown'}
+      </p>
+    )
+  }
+
   return (
     <details className={styles.details}>
       <summary>Engineering Evidence</summary>

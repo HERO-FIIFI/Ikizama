@@ -19,6 +19,21 @@
   color: var(--ink-2);
 }
 
+.sep {
+  color: var(--ink-3);
+}
+
+.row a.org {
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur) var(--ease);
+}
+
+.row a.org:hover,
+.row a.org:focus-visible {
+  border-bottom-color: var(--accent);
+}
+
 .mid {
   color: var(--ink-3);
 }
